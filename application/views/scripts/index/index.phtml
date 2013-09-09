@@ -1,0 +1,117 @@
+<div class="rightsidebar">
+	    	<div class="log-status">
+		<span class="log-status-message">
+		<?php echo $this->loggedInAs(); ?>	
+		</span>
+		
+	</div>
+ 	<div class="searchblock">
+		<?php echo $this->render('index/searchblock.phtml'); ?>
+		
+	</div>
+	<?php if (!Zend_Auth::getInstance()->getIdentity())
+{
+?>
+		<div class="loginblock">
+		<?php echo $this->render('index/loginblock.phtml');
+		
+		
+		 ?>
+			
+	</div>
+	
+	<?php } ?>
+
+<?php 
+if (Zend_Auth::getInstance()->getIdentity())
+{
+?>	
+
+<div class="adminpanel">
+<div class="adminpanel-link">
+<a class="manage-comments-link" href="<?php echo $this->url(array('controller'=>'admin', 
+        'action'=>'comments'));?>">Manage Comments</a>	
+</div>
+<div class="adminpanel-link">
+<a class="manage-articles-link" href="<?php echo $this->url(array('controller'=>'admin', 
+        'action'=>'articles'));?>">Manage Articles</a>	
+</div>
+
+        
+
+        
+	
+</div>
+<?php } ?>
+</div>
+
+<?php $this->headTitle('Login');
+
+ ?>
+
+
+<div class="article-page-title">Articles</div>
+
+<?php $this->inlineScript()->appendFile('js/paginator.js') ?>
+
+<div class="filter">
+	<a class="filter-link" href="<?php echo $this->url(array('controller'=>'index', 
+            'action'=>'index', 'sort'=>'timedesc'));?>">Time descending</a>
+    <a class="filter-link" href="<?php echo $this->url(array('controller'=>'index', 
+            'action'=>'index', 'sort'=>'timeasc'));?>">Time ascending</a>
+    <a class="filter-link" href="<?php echo $this->url(array('controller'=>'index', 
+            'action'=>'index', 'sort'=>'nameasc'));?>">Name ascending</a>
+    <a class="filter-link" href="<?php echo $this->url(array('controller'=>'index', 
+            'action'=>'index', 'sort'=>'namedesc'));?>">Name descending</a>
+            
+</div>
+
+<div id="paged-data-container">
+    <?php $paginationControl = $this->paginationControl($this->paginator, 'All', '_partials/paginator.phtml') ?>
+
+	<div class="pagination-control">
+    <?php echo $paginationControl ?>
+	</div>
+
+	<div class="paged-data">
+    <?php if (count($this->paginator)) : ?>
+    	<div>
+		<?php foreach($this->paginator as $album) : ?>
+			<div class="article-wrapper">
+		<a class="article-link" href="<?php echo $this->url(array('controller'=>'index', 
+            'action'=>'view', 'id'=>$album->ArticleId));?>"><?php echo $this->escape($album->ArticleTitle); ?></a>
+            
+		<span>Posted on <?php echo $album->ArticleDate; ?></span>
+		<div class="article-preview"><?php echo substr($album->ArticleText, 0, 300); ?></div>
+		</div>
+		<?php endforeach; ?>
+		</div>
+	<div>
+	<?php if(isset($this->a))
+	{ ?>
+	<h1>Comments</h1>
+	<?php foreach($this->comments as $comment) : ?>
+		<h2><?php echo $comment->CommentUserName; ?></h2>
+		
+		<p><?php echo $comment->CommentText; ?></p>
+		
+		<?php endforeach; ?>
+</div>
+
+<div>
+	<h1>Add Your own Comment</h1>
+	<?php echo $this->form ; ?>
+</div>	
+	<?php
+	 }
+	?>
+    <?php else : ?>
+    <p class="notice">No items found</p>
+    <?php endif ?>
+</div>
+
+<div class="pagination-control">
+    <?php echo $paginationControl ?>
+</div>
+
+</div>	

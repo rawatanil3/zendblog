@@ -1,0 +1,132 @@
+
+
+#page {
+    width: 960px;
+    margin: 1em auto;
+}
+
+#paged-data-container {
+	width: 1000px;
+    
+   /* padding: 1em;
+    margin: 0 auto;*/
+    border-radius: 10px;
+
+    overflow: hidden;
+    position: relative;
+}
+
+.paged-data {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.paginator {
+    float: right;
+}
+
+.paginator a {
+    text-decoration: none;
+}
+
+.paginator ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+.paginator ol,
+.paginator li,
+.paginator-nav {
+    float: left;
+}
+
+.paginator-nav a,
+.paginator-nav span {
+    display: block;
+    width: 48px;
+    height: 48px;
+    text-indent: -9999em;
+    outline: none;
+}
+
+.paginator-nav a.paginator-next {
+    background-image: url(../images/next.png);
+}
+
+.paginator-nav span.paginator-next {
+    background-image: url(../images/next-disabled.png);
+}
+
+.paginator-nav a.paginator-prev {
+    background-image: url(../images/back.png);
+}
+
+.paginator-nav span.paginator-prev {
+    background-image: url(../images/back-disabled.png);
+}
+
+.paginator li {
+    line-height: 48px;
+}
+
+.paginator li a,
+.paginator li span {
+    display: block;
+    padding: 0 1ex;
+}
+
+.paginator li span {
+    font-weight: bold;
+}
+
+.paginator li a {
+    color: #2DAE28;
+}
+
+.paginator li a:hover {
+    text-decoration: underline;
+}
+
+table.data {
+    clear: both;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #666;
+    margin: 1em 0;
+    font-size: 0.8em;
+    position: relative;
+}
+
+table.data th, table.data td {
+    padding: 1ex;
+}
+
+table.data th {
+    background-color: #999;
+    color: #fff;
+    text-align: left;
+}
+
+table.data td {
+    border: 1px solid #666;
+}
+
+.loading {
+    background-image: url(../images/ajax-loader.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: scroll;
+}
+
+.overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    opacity: .8;
+}

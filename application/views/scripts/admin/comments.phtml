@@ -1,0 +1,60 @@
+<?php echo $this->render('admin/index.phtml'); ?>
+<h1> Manage Comments</h1>
+
+
+
+
+<?php $this->inlineScript()->appendFile('js/paginator.js') ?>
+
+
+
+<div id="paged-data-container">
+    <?php $paginationControl = $this->paginationControl($this->paginator, 'All', '_partials/paginator.phtml') ?>
+
+	<div class="pagination-control">
+    <?php echo $paginationControl ?>
+	</div>
+
+	<div class="paged-data">
+    <?php if (count($this->paginator)) : ?>
+    		<table class="manage-comments-table">
+<tr>
+    <th>ArticleId</th>
+    <th>CommentText</th>
+    <th>User Name</th>
+    <th>User Email</th>
+    <th>Date</th>
+    <th>Status</th>
+    <th>&nbsp;</th>
+    
+</tr>
+    	<div>
+		<?php
+		$i = 1;
+		
+		 foreach($this->paginator as $comment) : ?>
+	
+<tr class="article-row">
+    <td><?php echo $this->escape($comment->ArticleId);?></td>
+    <td><?php echo $this->escape($comment->CommentText);?></td>
+    <td><?php echo $this->escape($comment->CommentUserName);?></td>
+    <td><?php echo $this->escape($comment->CommentUserEmail);?></td>
+    <td><?php echo $this->escape($comment->CommentDate);?></td>
+    <td><?php echo $this->escape($comment->CommentStatus);?></td>
+    <td>
+        <a class="edit-comment-link" href="<?php echo $this->url(array('controller'=>'admin', 
+            'action'=>'moderate', 'id'=>$comment->CommentId));?>">Details</a>
+        
+    </td>
+</tr>
+		<?php
+		$i++;
+		 endforeach; ?>
+		</div>
+	
+	
+    
+    <?php endif ?>
+</div>
+
+

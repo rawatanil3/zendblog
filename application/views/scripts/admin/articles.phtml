@@ -1,0 +1,55 @@
+<?php echo $this->render('admin/index.phtml'); ?>
+<h1>Manage Articles</h1>
+<p><a href="<?php echo $this->url(array('controller'=>'admin', 
+        'action'=>'add'));?>">Add new article</a></p>
+
+
+<?php $this->inlineScript()->appendFile('js/paginator.js') ?>
+
+
+
+<div id="paged-data-container">
+    <?php $paginationControl = $this->paginationControl($this->paginator, 'All', '_partials/paginator.phtml') ?>
+
+	<div class="pagination-control">
+    <?php echo $paginationControl ?>
+	</div>
+
+	<div class="paged-data">
+    <?php if (count($this->paginator)) : ?>
+    		<table class="manage-article-table">
+				<tr>
+    <th>&nbsp;</th>
+    <th>Article Title</th>
+    <th>Date Created</th>
+    <th>&nbsp;</th>
+</tr>
+    	<div>
+		<?php
+		$i = 1;
+		
+		 foreach($this->paginator as $album) : ?>
+	
+<tr class="article-row">
+	<td><?php echo $i; ?></td>
+    <td><?php echo $this->escape($album->ArticleTitle);?></td>
+    <td><?php echo $this->escape($album->ArticleDate);?></td>
+    <td>
+        <a class="edit-article-link" href="<?php echo $this->url(array('controller'=>'admin', 
+            'action'=>'edit', 'id'=>$album->ArticleId));?>">Edit</a>
+           </td>
+           <td>
+        <a class="delete-article-link" href="<?php echo $this->url(array('controller'=>'admin', 
+            'action'=>'delete', 'id'=>$album->ArticleId));?>">Delete</a>
+    </td>
+</tr>
+		<?php
+		$i++;
+		 endforeach; ?>
+		</div>
+	
+	
+    
+    <?php endif ?>
+</div>
+

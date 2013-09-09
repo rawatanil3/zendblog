@@ -1,0 +1,31 @@
+<?php echo $this->render('admin/index.phtml'); ?>
+<h1>Review Comment</h1>
+<table>
+<tr>
+    <th>Article Name</th>
+    <th>CommentText</th>
+    <th>User Name</th>
+    <th>User Email</th>
+    <th>Date</th>
+    <th>Status</th>
+    <th>&nbsp;</th>
+    
+</tr>
+<?php foreach($this->comments as $comment) : ?>
+<tr>
+    <td><?php echo $this->escape($comment->ArticleId);?></td>
+    <td><?php echo $this->escape($comment->CommentText);?></td>
+    <td><?php echo $this->escape($comment->CommentUserName);?></td>
+    <td><?php echo $this->escape($comment->CommentUserEmail);?></td>
+    <td><?php echo $this->escape($comment->CommentDate);?></td>
+    <td><?php echo $this->escape($comment->CommentStatus);?></td>
+    <td>
+        <a href="<?php echo $this->url(array('controller'=>'comments', 
+            'action'=>'details', 'id'=>$comment->CommentId));?>">Details</a>
+        
+    </td>
+</tr>
+<?php endforeach; ?>
+</table>
+
+<?php echo $this->form ; ?>

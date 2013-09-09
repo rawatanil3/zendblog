@@ -1,0 +1,94 @@
+<div class="rightsidebar">
+	    	<div class="log-status">
+		<span class="log-status-message">
+		<?php echo $this->loggedInAs(); ?>	
+		</span>
+		
+	</div>
+ 	<div class="searchblock">
+		<?php echo $this->render('index/searchblock.phtml'); ?>
+		
+	</div>
+	<?php if (!Zend_Auth::getInstance()->getIdentity())
+{
+?>
+		<div class="loginblock">
+		<?php echo $this->render('index/loginblock.phtml');
+		
+		
+		 ?>
+			
+	</div>
+	
+	<?php } ?>
+
+<?php 
+if (Zend_Auth::getInstance()->getIdentity())
+{
+?>	
+
+<div class="adminpanel">
+<div class="adminpanel-link">
+<a class="manage-comments-link" href="<?php echo $this->url(array('controller'=>'admin', 
+        'action'=>'comments'));?>">Manage Comments</a>	
+</div>
+<div class="adminpanel-link">
+<a class="manage-articles-link" href="<?php echo $this->url(array('controller'=>'admin', 
+        'action'=>'articles'));?>">Manage Articles</a>	
+</div>
+
+        
+
+        
+	
+</div>
+<?php } ?>
+</div>
+
+<div class="article-wrapper">
+	<?php foreach($this->albums as $album) : ?>
+		
+		<div class="article-title"><?php echo $this->escape($album->ArticleTitle); ?></div>
+            
+		<span class="article-date">Posted on <?php echo $album->ArticleDate; ?></span>
+		<div class="article-text"><?php echo $album->ArticleText; ?></div>
+		<?php endforeach; ?>
+</div>
+<div>
+	<?php if(isset($this->a))
+	{ ?>
+		<div class="comment-title">Comments</div>
+	<?php
+	$i = 0;
+	 foreach($this->comments as $comment) : ?>
+		<div class="comment-wrapper">
+		<span class="comment-author"><?php echo $comment->CommentUserName; ?></span>
+		
+		<p><?php echo $comment->CommentText; ?></p>
+		
+		<p><?php
+		
+		foreach ($this->$i as $image) : ?>
+			<img height="240" width="320" src="<?php echo $this->ServerUrl() . $image->ImageLink; ?>" />
+		 	
+		 	
+			<?php
+			$i++;
+			
+			endforeach;
+			
+			 ?></p>
+		</div>
+		<?php endforeach; ?>
+</div>
+
+<div class="new-comment-wrapper">
+	<div class="new-comment-header">Leave a comment</div>
+	<?php echo $this->render('index/addcomment.phtml'); ?>
+</div>	
+	<?php
+	 }
+	?>
+	
+	
+	

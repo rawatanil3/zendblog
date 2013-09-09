@@ -1,0 +1,45 @@
+<div class="rightsidebar">
+	    	<div class="log-status">
+		<span class="log-status-message">
+		<?php echo $this->loggedInAs(); ?>	
+		</span>
+		
+	</div>
+ <?php if (!Zend_Auth::getInstance()->getIdentity())
+{
+?>
+		<div class="loginblock">
+		<?php echo $this->render('index/loginblock.phtml');
+		
+		
+		 ?>
+			
+	</div>
+	
+	<?php } ?>
+	<div class="searchblock">
+		<?php echo $this->render('admin/searchblock.phtml'); ?>
+		
+	</div>
+<?php 
+if (Zend_Auth::getInstance()->getIdentity())
+{
+?>	
+
+<div class="adminpanel">
+<div class="adminpanel-link">
+<a class="manage-comments-link" href="<?php echo $this->url(array('controller'=>'admin', 
+        'action'=>'comments'));?>">Manage Comments</a>	
+</div>
+<div class="adminpanel-link">
+<a class="manage-articles-link" href="<?php echo $this->url(array('controller'=>'admin', 
+        'action'=>'articles'));?>">Manage Articles</a>	
+</div>
+
+        
+
+        
+	
+</div>
+<?php } ?>
+</div>
